@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>814</width>
+    <height>932</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Build Multicell Cavity</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox_InnerCell">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>381</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <underline>true</underline>
+     <stylestrategy>PreferAntialias</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="title">
+    <string>Internal Cell Database Listing</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>361</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>361</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <strikeout>false</strikeout>
+     </font>
+    </property>
+    <property name="columnCount">
+     <number>15</number>
+    </property>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>160</number>
+    </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>160</number>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>Cell Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Frequency [MHz]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>A [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>B [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>a [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>b [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Eq Radius [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Iris Radius [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Semicell Length [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Geo Beta</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Epeak/Eacc</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Hpeak/Eacc</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>r/Q [Ohm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Q BCS @ 2K</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>K [%]</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_EndGroup">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>9</y>
+     <width>381</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <underline>true</underline>
+     <stylestrategy>PreferAntialias</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="title">
+    <string>End Group Database Listing</string>
+   </property>
+   <widget class="QTableWidget" name="tableWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>361</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>361</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <strikeout>false</strikeout>
+     </font>
+    </property>
+    <property name="columnCount">
+     <number>24</number>
+    </property>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>160</number>
+    </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>160</number>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>EG Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Frequency [MHz]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Geo Beta</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Epeak/Eacc</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Hpeak/Eacc</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>r/Q [Ohm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Q BCS @ 2K</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>K [%]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>PC A [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>PC B [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>PC a [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>PC b [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>PC R [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>PC r [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>PC L [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>EC A [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>EC B [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>EC a [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>EC b [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>EC R [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>EC r [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>EC L [mm]</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>L tube</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>L tube @ Riris</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Quit">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>430</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_SuperfishExecution">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>450</y>
+     <width>201</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <stylestrategy>PreferDefault</stylestrategy>
+    </font>
+   </property>
+   <property name="tabletTracking">
+    <bool>false</bool>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhNone</set>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="autoDefault">
+    <bool>true</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_InternalCell">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>440</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Internal Cell:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_LeftCell">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>480</y>
+     <width>221</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Choose Left End Cell or End Group:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_RightCell">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>520</y>
+     <width>211</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Choose Right End Cell or End Group:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_NumberOfCells">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>560</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Number of Cells:</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>420</y>
+     <width>381</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="title">
+    <string>Cells</string>
+   </property>
+   <widget class="QLineEdit" name="textEdit_NumberCell">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>140</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>620</y>
+     <width>661</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="lay_plot"/>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>590</y>
+     <width>801</width>
+     <height>341</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Cavity profile</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cb_InnerCell">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>430</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cb_EndGroup1">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>470</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cb_EndGroup2">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>510</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <zorder>groupBox_2</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>groupBox_InnerCell</zorder>
+  <zorder>groupBox_EndGroup</zorder>
+  <zorder>pushButton_Quit</zorder>
+  <zorder>pushButton_SuperfishExecution</zorder>
+  <zorder>label_InternalCell</zorder>
+  <zorder>label_LeftCell</zorder>
+  <zorder>label_RightCell</zorder>
+  <zorder>label_NumberOfCells</zorder>
+  <zorder>horizontalLayoutWidget</zorder>
+  <zorder>cb_InnerCell</zorder>
+  <zorder>cb_EndGroup1</zorder>
+  <zorder>cb_EndGroup2</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

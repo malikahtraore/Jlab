@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Drow_cavity</class>
+ <widget class="QDialog" name="Drow_cavity">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>763</width>
+    <height>426</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Cavity db</string>
+  </property>
+  <widget class="QPushButton" name="db_OK">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>392</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="db_cancel">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>392</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>721</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>361</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <strikeout>false</strikeout>
+    </font>
+   </property>
+   <property name="columnCount">
+    <number>16</number>
+   </property>
+   <attribute name="horizontalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderMinimumSectionSize">
+    <number>160</number>
+   </attribute>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>160</number>
+   </attribute>
+   <column>
+    <property name="text">
+     <string>Cell Name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Frequency [MHz]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>A [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>B [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>a [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>b [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Eq Radius [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Iris Radius [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Semicell length [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Geom Beta</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Length of Equator </string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Epeak/Eacc</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Hpeak/Eacc</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>r/Q [Ohm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Q BCS @ 2K</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>K [%]</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QFrame" name="frame_i2">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>320</y>
+     <width>221</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="db_addData">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>30</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add Cell</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="te_i2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_i2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cell Name</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_GetEG">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>340</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Get Cell</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="db_import">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>340</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Delete">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>340</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="db_view">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>340</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>View</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

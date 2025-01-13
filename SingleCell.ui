@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>821</width>
+    <height>514</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Single Cell</string>
+  </property>
+  <widget class="QTableWidget" name="TW">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>781</width>
+     <height>361</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>50</weight>
+     <bold>false</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
+    </font>
+   </property>
+   <property name="dragEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="dragDropMode">
+    <enum>QAbstractItemView::InternalMove</enum>
+   </property>
+   <column>
+    <property name="text">
+     <string>Single Cell Name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Frequency [MHz]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Geom Beta</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Epeak/Eacc</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Hpeak/Eacc</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>r/Q [Ohm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Q BCS @ 2K</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>K [%]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PC A [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PC B [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PC a [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PC b [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PC R [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PC r [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PC L [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EC A [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EC B [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EC a [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EC b [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EC R [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EC r [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EC L [mm]</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>L tube</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>L tube @ Riris</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="pb_cancel">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>470</y>
+     <width>51</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pb_OK">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>470</y>
+     <width>51</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_GetEG">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>400</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Get Single Cell</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Import">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>400</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Delete">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>400</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_View">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>400</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>View</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>390</y>
+     <width>141</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Single Cell Name</string>
+   </property>
+   <widget class="QTextEdit" name="textEdit_EndGroup">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <italic>false</italic>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="midLineWidth">
+     <number>0</number>
+    </property>
+    <property name="overwriteMode">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_Add">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add to db</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
