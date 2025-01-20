@@ -29,7 +29,6 @@ class Draw_cavity_profile():
 
         #self.CAV[0,6]=self.CAV[0,6]-self.LEQ
 
-
 ###############################################################################  
 
     # it defines the cavity profile coordinates --> used to draw the profile in draw.py           
@@ -65,8 +64,8 @@ class Draw_cavity_profile():
                     cell_data = self.CAV[1,:]
                 elif CAV_PROF[k][0] == 'I':
                     cell_data = self.CAV[2,:] 
-                
-                sc_prof = self.half_cell_coo(cell_data,self.new_parameter) # here you have to add the new parameter
+
+                sc_prof = self.half_cell_coo(cell_data,self.new_parameter) # here you have to add the new parameter for HC
 
                 if len(sc_prof) == 0:
                     return []
@@ -171,7 +170,6 @@ class Draw_cavity_profile():
 ###############################################################################
  
     def half_cell_coo(self, cell_data, new_parameter):
-        print('half cell coordinates')
         a = cell_data[0]
         b = cell_data[1]
         A = cell_data[2]
@@ -220,11 +218,14 @@ class Draw_cavity_profile():
             prof = np.append(EL1, R, axis=0) 
             prof = np.append(prof, EL2, axis=0) 
 
+            print('prof before ', prof)
             #### new lines
             for i in range(len(prof)): # new line for new parameter by Elisa
                 prof[i,0]+=self.new_parameter # new line for new parameter by Elisa
 
+            print('prof after ', prof)
             prof = np.insert(prof,0,[0,EL1[0,1]],axis=0) # new line for new parameter by Elisa
+            print('prof after 2 ', prof)
 
             return prof
         

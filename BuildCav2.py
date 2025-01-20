@@ -89,7 +89,6 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
         #variable for the equator length
 
         self.new_parameter=0 # add by Elisa
-        
         #self.actionClose.triggered.connect(self.Quit)
         
 
@@ -1475,7 +1474,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                    
             try:
                 #x = Draw_cavity_profile('', CAV, 1) # old version before new_parameter
-                x = Draw_cavity_profile_new('', CAV, 1, self.new_parameter)
+                x = Draw_cavity_profile_new('', CAV, 1, self.new_parameter,self)
                 CAV_coo = x.CAV_coo()
                 self.XC_param = x.XC_param
 
@@ -1487,7 +1486,9 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                     CAV_coo = np.append(CAV_coo, add, axis = 0)
                     
                     self.figure.clf()
-                    ax=self.figure.add_subplot(1,1,1)     
+                    ax=self.figure.add_subplot(1,1,1)    
+                    print('cav_coo[:,0] ', CAV_coo[:,0])
+                    print('cav_coo[:,1] ', CAV_coo[:,1]) 
                     ax.plot(CAV_coo[:,0], CAV_coo[:,1], 'r-')
                     self.canvas.draw()
             except:
@@ -1897,7 +1898,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
         CAV[0,:] = CELL
         IC = CELL
         #x = Draw_cavity_profile(path, CAV, 1.4)    # old 
-        x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter)    
+        x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter,self)    
 
         geom=Geometry()
         Pic=geom.racc_point(IC)
@@ -2083,6 +2084,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                 self.CAV_py_2[0,4] = float(self.le_d_EC.text())
                 self.CAV_py_2[0,5] = float(self.le_SLpy_EC.text())                    
                 self.CAV_py_2[0,6] = float(self.le_H_EC.text())
+                self.new_parameter_EC = float(self.le_LEQ_EC.text())
             
                 self.CAV_py_2[2,0] = float(self.le_IRpy_IC.text())       
                 self.CAV_py_2[2,1] = float(self.le_alpha_IC.text())                  
@@ -2091,6 +2093,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                 self.CAV_py_2[2,4] = float(self.le_d_IC.text())
                 self.CAV_py_2[2,5] = float(self.le_SLpy_IC.text())                    
                 self.CAV_py_2[2,6] = float(self.le_H_IC.text())
+                self.new_parameter_IC = float(self.le_LEQ_IC.text())
         except:
             if self.le_Sxeq_EC.text() == '' or self.le_Sxeq_IC.text() == '':
                 self.warning_wdj('Choose an inner and end cell first.')
@@ -2153,7 +2156,8 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                 self.CAV_ge_2[0,4] = float(self.le_ER_EC.text())  
                 self.CAV_ge_2[0,5] = float(self.le_IR_EC.text())                       
                 self.CAV_ge_2[0,6] = float(self.le_SL_EC.text())
-                
+                self.new_parameter_EC = float(self.le_LEQ_EC.text())
+
                 self.CAV_ge_2[2,0] = float(self.le_Sxeq_IC.text())            
                 self.CAV_ge_2[2,1] = float(self.le_Syeq_IC.text())                 
                 self.CAV_ge_2[2,2] = float(self.le_Sxir_IC.text())                 
@@ -2161,6 +2165,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                 self.CAV_ge_2[2,4] = float(self.le_ER_IC.text())  
                 self.CAV_ge_2[2,5] = float(self.le_IR_IC.text())                       
                 self.CAV_ge_2[2,6] = float(self.le_SL_IC.text())
+                self.new_parameter_IC = float(self.le_LEQ_IC.text())
                               
         except:
             if self.le_Sxeq_EC.text() == '' or self.le_Sxeq_IC.text() == '':
@@ -3307,8 +3312,8 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
 
     def draw_new_EG(self,IC_EG,l1,l2,CAV,path_to_elmg_file): # to draw the EG profile
         try:
-            x = Draw_cavity_profile('', IC_EG, 1) # old
-            #x = Draw_cavity_profile_new('', IC_EG, 1, self.new_parameter)
+            #x = Draw_cavity_profile('', IC_EG, 1) # old commentato 17 01 2025
+            x = Draw_cavity_profile_new('', IC_EG, 1, self.new_parameter_IC,self)
 
             IC_coo = x.CAV_coo()
             IC_coo[:,0] = -IC_coo[:,0] + IC_coo[-1,0] 
@@ -3318,8 +3323,8 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             self.EC_EG = np.zeros((3,8))
             self.EC_EG[0,:] = CAV[0,:]
             self.EC_EG[0,7] = 16
-            x = Draw_cavity_profile('', self.EC_EG, 1) # old
-            #x = Draw_cavity_profile_new('', self.EC_EG, 1, self.new_parameter)
+            #x = Draw_cavity_profile('', self.EC_EG, 1) # old
+            x = Draw_cavity_profile_new('', self.EC_EG, 1, self.new_parameter_EC,self)
             EC_coo = x.CAV_coo()
             EC_coo[:,0] = EC_coo[:,0] + IC_coo[-1,0]
         
@@ -3341,7 +3346,9 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             CAV_coo = np.append(CAV_coo, add, axis = 0)
 
 
-            ax=self.figure.add_subplot(1,1,1)     
+            ax=self.figure.add_subplot(1,1,1)   
+            print('cav_coo[:,0] ', CAV_coo[:,0])
+            print('cav_coo[:,1] ', CAV_coo[:,1])  
             ax.plot(CAV_coo[:,0], CAV_coo[:,1], 'r-')
             self.canvas.draw()
 
