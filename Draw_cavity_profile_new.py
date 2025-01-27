@@ -218,14 +218,11 @@ class Draw_cavity_profile():
             prof = np.append(EL1, R, axis=0) 
             prof = np.append(prof, EL2, axis=0) 
 
-            print('prof before ', prof)
             #### new lines
             for i in range(len(prof)): # new line for new parameter by Elisa
                 prof[i,0]+=self.new_parameter # new line for new parameter by Elisa
 
-            print('prof after ', prof)
             prof = np.insert(prof,0,[0,EL1[0,1]],axis=0) # new line for new parameter by Elisa
-            print('prof after 2 ', prof)
 
             return prof
         

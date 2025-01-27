@@ -1486,9 +1486,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                     CAV_coo = np.append(CAV_coo, add, axis = 0)
                     
                     self.figure.clf()
-                    ax=self.figure.add_subplot(1,1,1)    
-                    print('cav_coo[:,0] ', CAV_coo[:,0])
-                    print('cav_coo[:,1] ', CAV_coo[:,1]) 
+                    ax=self.figure.add_subplot(1,1,1)     
                     ax.plot(CAV_coo[:,0], CAV_coo[:,1], 'r-')
                     self.canvas.draw()
             except:
@@ -2384,15 +2382,15 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
 
     def run_EG_sym(self, path, CAV, F_guess, dx, beta):
         CAV[0,7] = 18
-        x = Draw_cavity_profile(path, CAV, 1.4) # old
-        #x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter)    
+        #x = Draw_cavity_profile(path, CAV, 1.4) # old
+        x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter,self)    
         IC = CAV[2,0:7]
         geom=Geometry()
         Pic=geom.racc_point(CAV[2,0:7])
         #Pic = x.racc_point(CAV[2,0:7])
         CAV[0,7] = 16
-        x = Draw_cavity_profile(path, CAV, 1.4)  # old
-        #x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter)   
+        #x = Draw_cavity_profile(path, CAV, 1.4)  # old
+        x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter,self)   
         EC = CAV[0,0:7]
         Pec = geom.racc_point(CAV[0,0:7])
         #Pec = x.racc_point(CAV[0,0:7])
@@ -2571,11 +2569,11 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
         
         try:
             if self.tabWidget.currentIndex()==1: # EG
-                l1 = float(self.le_tube_length.text())
-                l2 = float(self.le_tube_length_Rir.text())
+                l1 = float((self.le_tube_length.text()).replace(' ',''))
+                l2 = float((self.le_tube_length_Rir.text()).replace(' ',''))
             elif self.tabWidget.currentIndex()==3: # SC
-                l1 = float(self.le_tube_length_2.text())
-                l2 = float(self.le_tube_length_Rir_2.text())
+                l1 = float((self.le_tube_length_2.text()).replace(' ',''))
+                l2 = float((self.le_tube_length_Rir_2.text()).replace(' ',''))
         except:
             self.warning_wdj('Tube lengths must be positive float numbers.')    
             ok = 1
@@ -3346,9 +3344,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             CAV_coo = np.append(CAV_coo, add, axis = 0)
 
 
-            ax=self.figure.add_subplot(1,1,1)   
-            print('cav_coo[:,0] ', CAV_coo[:,0])
-            print('cav_coo[:,1] ', CAV_coo[:,1])  
+            ax=self.figure.add_subplot(1,1,1)     
             ax.plot(CAV_coo[:,0], CAV_coo[:,1], 'r-')
             self.canvas.draw()
 

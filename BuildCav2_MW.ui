@@ -1050,7 +1050,7 @@ image: url(:/database_img/database_img.png);</string>
            </rect>
           </property>
           <property name="readOnly">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
          <widget class="QLabel" name="label_22">
@@ -1167,7 +1167,7 @@ image: url(:/database_img/database_img.png);</string>
            </rect>
           </property>
           <property name="readOnly">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
          <widget class="QLineEdit" name="le_Sxir_EC">

@@ -39,6 +39,9 @@ class Press_Button_ELMG_simulation():
         self.parent=parent # used to recall some values from parent class BuildCav2
         self.new_parameter = getattr(self.parent, 'new_parameter', None)
 
+        self.new_parameter_IC = getattr(self.parent, 'new_parameter_IC', None)
+        self.new_parameter_EC = getattr(self.parent, 'new_parameter_EC', None)
+
 ##############################################################################
         
     def warning_wdj(self, text):
@@ -1056,8 +1059,19 @@ class Press_Button_ELMG_simulation():
         '$po x='+str(X_c[-1]+IC[6]-Pic[0,0])+ ', y ='+str(Pic[0,1])+ '$',
         '$po NT=2, x0='+str(X_c[-1]+IC[6])+', y0='+str(IC[4]-IC[1])+', x= 0.0, y='+str(IC[1])+', A='+str(IC[0])+', B='+str(IC[1])+'$']
 
-        X_c += [IC[6]]
-        
+        # to consider the new parameters in the SuperFish simulation: new_parameter_IC and new_parameter_EC are
+        # the equator_length for IC (PC) and EC rispectively
+        if self.new_parameter_IC != 0: # add by Elisa
+            lines += [
+                '$po x='+str(X_c[-1]+IC[6]+self.new_parameter_IC)+', y='+str(IC[4]-IC[1]+IC[1])+'$'
+            ]
+        if self.new_parameter_EC != 0:
+                        lines += [
+                '$po x='+str(X_c[-1]+IC[6]+self.new_parameter_IC+self.new_parameter_EC)+', y='+str(IC[4]-IC[1]+IC[1])+'$'
+            ]
+
+        X_c += [IC[6]+self.new_parameter_IC+self.new_parameter_EC]
+
         lines += [
         '$po NT=2, x0='+str(X_c[-1])+', y0='+str(EC[4]-EC[1])+', x='+str(Pec[0,0])+', y='+str(Pec[0,1]-(EC[4]-EC[1]))+', A='+str(EC[0])+', B='+str(EC[1])+'$',
         '$po x='+str(X_c[-1]+Pec[1,0])+ ', y ='+str(Pec[1,1])+ '$',
@@ -1070,17 +1084,18 @@ class Press_Button_ELMG_simulation():
             lines += ['$po x='+str(X_c[-1])+', y='+str(EC[5])+ '$',
             '$po x='+str(X_c[-1])+', y=0.0$',
             '$po x=0.0, y=0.0$'] 
-        elif l_tube_Rir !=0 and l_tube!=0: 
+        elif l_tube_Rir !=0 and l_tube!=0:
             
             # modifica L tube @ Riris
             X_c += [X_c[-1]+l_tube_Rir]
             lines += ['$po x='+str(X_c[-1])+', y='+str(EC[5])+ '$']
             X_c += [X_c[-1]+CAV[0,5]-CAV[2,5]]
             lines += ['$po x='+str(X_c[-1])+', y='+str(IC[5])+ '$']
-            X_c += [X_c[-3]+l_tube]  
+            X_c += [X_c[-3]+l_tube]
             lines += ['$po x='+str(X_c[-1])+', y='+str(IC[5])+ '$', 
             '$po x='+str(X_c[-1])+', y=0.0$',
             '$po x=0.0, y=0.0$'] 
+
         else:
             lines += ['$po x='+str(X_c[-1])+', y=0.0$',
             '$po x=0.0, y=0.0$'] 
