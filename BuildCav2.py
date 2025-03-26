@@ -80,6 +80,9 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
         self.CAV=np.zeros((3,8))
         self.pathDB=''
         self.path_project=''
+
+        self.eq_length_avg = 0 #varibale for finding the average Malikah
+
         
         self.frame_geometric.show()
         self.frame_phisic.hide()
@@ -3013,11 +3016,11 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
 
 
                 
-#star
+#start
     def tune_with_EquatorLength(self):
-        AXY = (self.new_parameter_EC + self.new_parameter_IC)/2 #the average
-        self.new_parameter_EC = AXY
-        self.new_parameter_IC = AXY
+        self.eq_length_avg = (self.new_parameter_EC + self.new_parameter_IC)/2 #the average
+        self.new_parameter_EC = self.eq_length_avg
+        self.new_parameter_IC = self.eq_length_avg
         
         if self.tabWidget.currentIndex() == 1: # EG
             freq=self.le_f_2.text()             #gets frequency inputs from the endgroup tab?
