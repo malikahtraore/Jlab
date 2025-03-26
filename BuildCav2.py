@@ -1486,7 +1486,9 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                     CAV_coo = np.append(CAV_coo, add, axis = 0)
                     
                     self.figure.clf()
-                    ax=self.figure.add_subplot(1,1,1)     
+                    ax=self.figure.add_subplot(1,1,1)    
+                    print('cav_coo[:,0] ', CAV_coo[:,0])
+                    print('cav_coo[:,1] ', CAV_coo[:,1]) 
                     ax.plot(CAV_coo[:,0], CAV_coo[:,1], 'r-')
                     self.canvas.draw()
             except:
@@ -1509,11 +1511,11 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                 cont=0
                 try:
                     if self.le_Sxeq.text()!='':
-                        self.CELL[0]=self.le_Sxeq.text()
+                        self.CELL[0]=self.le_Sxeq.text() #Semiaxis equator input for half cells
                     else:
                         self.CELL[0]=0
                     if self.le_Syeq.text()!='':
-                        self.CELL[1]=self.le_Syeq.text()
+                        self.CELL[1]=self.le_Syeq.text() 
                     else:
                         self.CELL[1]=0
                     if self.le_Sxir.text()!='':
@@ -1979,7 +1981,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
         self.le_SLpy_IC.setText('')
         self.le_H_IC.setText('')
         self.le_LEQ_IC.setText('') # add
-        
+
         self.le_Sxeq_EC.setText('')
         self.le_Syeq_EC.setText('')
         self.le_Sxir_EC.setText('')
@@ -2382,15 +2384,15 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
 
     def run_EG_sym(self, path, CAV, F_guess, dx, beta):
         CAV[0,7] = 18
-        #x = Draw_cavity_profile(path, CAV, 1.4) # old
-        x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter,self)    
+        x = Draw_cavity_profile(path, CAV, 1.4) # old
+        #x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter)    
         IC = CAV[2,0:7]
         geom=Geometry()
         Pic=geom.racc_point(CAV[2,0:7])
         #Pic = x.racc_point(CAV[2,0:7])
         CAV[0,7] = 16
-        #x = Draw_cavity_profile(path, CAV, 1.4)  # old
-        x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter,self)   
+        x = Draw_cavity_profile(path, CAV, 1.4)  # old
+        #x = Draw_cavity_profile_new(path, CAV, 1.4, self.new_parameter)   
         EC = CAV[0,0:7]
         Pec = geom.racc_point(CAV[0,0:7])
         #Pec = x.racc_point(CAV[0,0:7])
@@ -2569,11 +2571,11 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
         
         try:
             if self.tabWidget.currentIndex()==1: # EG
-                l1 = float((self.le_tube_length.text()).replace(' ',''))
-                l2 = float((self.le_tube_length_Rir.text()).replace(' ',''))
+                l1 = float(self.le_tube_length.text())
+                l2 = float(self.le_tube_length_Rir.text())
             elif self.tabWidget.currentIndex()==3: # SC
-                l1 = float((self.le_tube_length_2.text()).replace(' ',''))
-                l2 = float((self.le_tube_length_Rir_2.text()).replace(' ',''))
+                l1 = float(self.le_tube_length_2.text())
+                l2 = float(self.le_tube_length_Rir_2.text())
         except:
             self.warning_wdj('Tube lengths must be positive float numbers.')    
             ok = 1
@@ -2625,17 +2627,17 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
     def tune_with_Req(self):
         
         if self.tabWidget.currentIndex() == 1: # EG
-            freq=self.le_f_2.text()
+            freq=self.le_f_2.text()             #gets frequency inputs from the endgroup tab?
         elif self.tabWidget.currentIndex() == 3: # SC
             freq=self.le_f_3.text()
 
         #if self.le_f_2.text() == '':
         if freq == '':
-            self.warning_wdj('Please insert a valid frequency!')
+            self.warning_wdj('Please insert a valid frequency!') #Warning when a positive interger isn't inputed
         else:
             emfn1=emfn()
             if self.tabWidget.currentIndex() == 1: # EG
-                self.F_target = float(self.le_f_2.text())
+                self.F_target = float(self.le_f_2.text()) #does this convert the frequency to a float?
             elif self.tabWidget.currentIndex() == 3: # SC
                 self.F_target = float(self.le_f_3.text())
 
@@ -2666,9 +2668,9 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                         self.CAV[0,0:7] = self.CAV_ge_2[0,0:7]
                         self.CAV[2,0:7] = self.CAV_ge_2[2,0:7]
                         self.CAV[0,7] = 19
-                        if self.CAV[0,4] != self.CAV[2,4]: 
+                        if self.CAV[0,4] != self.CAV[2,4]: #Cecks if the equator diameters aren't the same?
                             if self.uniform_equator_diameter() == 'yes':
-                                self.CAV[2,4] = self.CAV[0,4]
+                                self.CAV[2,4] = self.CAV[0,4] # does this make the equator diameter equal?
                                 self.CAV_ge_2[2,4] = self.CAV_ge_2[0,4]
                                 self.g2p_2(self.CAV_ge_2[2,:], 1)
                                 ok = 0
@@ -2726,7 +2728,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             if self.path_to_elmg_file != '':
                 ok = 0
                 try:
-                    if self.F_target < 0:
+                    if self.F_target < 0: #the frequancy target should not be less than zero
                         self.warning_wdj('Frequency target must be positive float number!')
                         ok = 1
                     else:
@@ -3007,130 +3009,71 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
 
                 self.CAV_tuning=self.CAV
                 self.fill_g_param_2(self.CAV)
+            
 
+
+                
+#star
     def tune_with_EquatorLength(self):
-        emfn1=emfn()
-        ok=0
-        f_toll=0
-
+        AXY = (self.new_parameter_EC + self.new_parameter_IC)/2 #the average
+        self.new_parameter_EC = AXY
+        self.new_parameter_IC = AXY
+        
         if self.tabWidget.currentIndex() == 1: # EG
-            if self.le_f_2.text() == '':
-                self.warning_wdj('Please insert a valid frequency!')
-            else:
-                self.F_target = float(self.le_f_2.text())
-                self.define_elmg_path('function') 
-                ok=0
-                if self.path_to_elmg_file != '':
-                    ok = 0
-                    try:
-                        if self.F_target < 0:
-                            self.warning_wdj('Frequency target must be positive float number!')
-                            ok = 1
-                        else:
-                            widget_tune_parameters = Tune_parameters(self)
-                            widget_tune_parameters.exec_() 
-                            f_toll = widget_tune_parameters.f_toll
-                    except:
-                        self.warning_wdj('Frequency target must be positive float number!')
-                        ok = 1
-                else:
-                    ok = 1  
+            freq=self.le_f_2.text()             #gets frequency inputs from the endgroup tab?
 
 
-        if self.tabWidget.currentIndex() == 3: # SC
-            if self.le_f_3.text() == '':
-                self.warning_wdj('Please insert a valid frequency!')
-            else:
-                self.F_target = float(self.le_f_3.text())
-                self.define_elmg_path('function') 
-                ok=0
-                if self.path_to_elmg_file != '':
-                    ok = 0
-                    try:
-                        if self.F_target < 0:
-                            self.warning_wdj('Frequency target must be positive float number!')
-                            ok = 1
-                        else:
-                            widget_tune_parameters = Tune_parameters(self)
-                            widget_tune_parameters.exec_() 
-                            f_toll = widget_tune_parameters.f_toll
-                    except:
-                        self.warning_wdj('Frequency target must be positive float number!')
-                        ok = 1
-                else:
-                    ok = 1  
-
-
-        if ok == 0 and self.path_to_elmg_file != '':
-            self.CAV = np.zeros((3,8))
-
-
+        #if self.le_f_2.text() == '':
+        if freq == '':
+            self.warning_wdj('Please insert a valid frequency!') #Warning when a positive interger isn't inputed
+        else:
+            emfn1=emfn()
             if self.tabWidget.currentIndex() == 1: # EG
-                if self.cb_geometric_2.isChecked() == True and self.get_geom_2() == 0:
-                    self.CAV[0,0:7] = self.CAV_ge_2[0,0:7]
-                    self.CAV[2,0:7] = self.CAV_ge_2[2,0:7]
-                    self.CAV[0,7] = 19
-                    if self.CAV[0,4] != self.CAV[2,4]:
-                        if self.uniform_equator_diameter() == 'yes':
-                            self.CAV[2,4] = self.CAV[0,4]
-                            self.CAV_ge_2[2,4] = self.CAV_ge_2[0,4]
-                            self.le_ER_IC.setText(str(self.CAV_ge_2[0,4]))
-                            ok = 0
-                        else:
-                            ok = 1
-                    
-                elif self.cb_physic_2.isChecked() == True and self.get_phisic_2() == 0:
-                    self.p2g_2(self.CAV_py_2[0,:], 0)
-                    self.p2g_2(self.CAV_py_2[2,:], 1)
-                    self.CAV[0,0:7] = self.CAV_ge_2[0,0:7]
-                    self.CAV[2,0:7] = self.CAV_ge_2[2,0:7]
-                    self.CAV[0,7] = 19
-                    if self.CAV[0,4] != self.CAV[2,4]: 
-                        if self.uniform_equator_diameter() == 'yes':
-                            self.CAV[2,4] = self.CAV[0,4]
-                            self.CAV_ge_2[2,4] = self.CAV_ge_2[0,4]
-                            self.g2p_2(self.CAV_ge_2[2,:], 1)
-                            ok = 0
-                        else:
-                            ok = 1   
+                self.F_target = float(self.le_f_2.text()) #does this convert the frequency to a float?
 
-            elif self.tabWidget.currentIndex() == 3: # SC
-                if self.cb_geometric_3.isChecked() == True and self.get_geom_3() == 0:
-                    self.CAV[0,0:7] = self.CAV_ge_2[0,0:7]
-                    self.CAV[2,0:7] = self.CAV_ge_2[2,0:7]
-                    self.CAV[0,7] = 19
-                    if self.CAV[0,4] != self.CAV[2,4]:
-                        if self.uniform_equator_diameter() == 'yes':
-                            self.CAV[2,4] = self.CAV[0,4]
-                            self.CAV_ge_2[2,4] = self.CAV_ge_2[0,4]
-                            self.le_ER_IC_2.setText(str(self.CAV_ge_2[0,4]))
-                            ok = 0
-                        else:
-                            ok = 1
-                    
-                elif self.cb_physic_3.isChecked() == True and self.get_phisic_3() == 0:
-                    self.p2g_3(self.CAV_py_2[0,:], 0)
-                    self.p2g_3(self.CAV_py_2[2,:], 1)
-                    self.CAV[0,0:7] = self.CAV_ge_2[0,0:7]
-                    self.CAV[2,0:7] = self.CAV_ge_2[2,0:7]
-                    self.CAV[0,7] = 19
-                    if self.CAV[0,4] != self.CAV[2,4]: 
-                        if self.uniform_equator_diameter() == 'yes':
-                            self.CAV[2,4] = self.CAV[0,4]
-                            self.CAV_ge_2[2,4] = self.CAV_ge_2[0,4]
-                            self.g2p_3(self.CAV_ge_2[2,:], 1)
-                            ok = 0
-                        else:
-                            ok = 1   
+            self.define_elmg_path('function')
+    
+            ok=0
+            if ok == 0 and self.path_to_elmg_file != '':
+                self.CAV = np.zeros((3,8))
+                # if geometric parameters are filled 
+                
+                if self.tabWidget.currentIndex() == 1: # EG
+                    if self.cb_geometric_2.isChecked() == True and self.get_geom_2() == 0:
+                        self.CAV[0,0:7] = self.CAV_ge_2[0,0:7]
+                        self.CAV[2,0:7] = self.CAV_ge_2[2,0:7]
+                        self.CAV[0,7] = 19
+                        if self.CAV[0,4] != self.CAV[2,4]:
+                            if self.uniform_equator_diameter() == 'yes':
+                                self.CAV[2,4] = self.CAV[0,4]
+                                self.CAV_ge_2[2,4] = self.CAV_ge_2[0,4]
+                                self.le_ER_IC.setText(str(self.CAV_ge_2[0,4]))
+                                ok = 0
+                            else:
+                                ok = 1
+                    # if physic parameters are filled
+                    elif self.cb_physic_2.isChecked() == True and self.get_phisic_2() == 0:
+                        self.p2g_2(self.CAV_py_2[0,:], 0)
+                        self.p2g_2(self.CAV_py_2[2,:], 1)
+                        self.CAV[0,0:7] = self.CAV_ge_2[0,0:7]
+                        self.CAV[2,0:7] = self.CAV_ge_2[2,0:7]
+                        self.CAV[0,7] = 19
+                        if self.CAV[0,4] != self.CAV[2,4]: #Cecks if the equator diameters aren't the same?
+                            if self.uniform_equator_diameter() == 'yes':
+                                self.CAV[2,4] = self.CAV[0,4] # does this make the equator diameter equal?
+                                self.CAV_ge_2[2,4] = self.CAV_ge_2[0,4]
+                                self.g2p_2(self.CAV_ge_2[2,:], 1)
+                                ok = 0
+                            else:
+                                ok = 1   
+                
                             
             if self.path_to_elmg_file != '':   
                 if ok == 0 and self.get_tube_lenght(self.CAV) == 0:  
                     if self.tabWidget.currentIndex() == 1: # EG
                         self.CAV[1,-1] = float(self.le_tube_length.text())
                         self.CAV[2,-1] = float(self.le_tube_length_Rir.text())   
-                    elif self.tabWidget.currentIndex() == 3: # SC
-                        self.CAV[1,-1] = float(self.le_tube_length_2.text())
-                        self.CAV[2,-1] = float(self.le_tube_length_Rir_2.text())  
+
                 else: 
                     ok = 1
                     
@@ -3138,82 +3081,87 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                     self.dx = self.CAV[0,2]/5
                     self.beta=emfn1.def_beta_EG(self.F_target, self.CAV)
                     if self.tabWidget.currentIndex() == 1: # EG
-                        self.le_beta_2.setText(str(self.beta))   
-                    elif self.tabWidget.currentIndex() == 3: # SC
-                        self.le_beta_3.setText(str(self.beta))
-              
-            if  ok == 0 and f_toll != 'cancel': 
-                if self.tabWidget.currentIndex() == 1: # EG
-                    self.g2p_2(self.CAV[0,:], 0)
-                elif self.tabWidget.currentIndex() == 3: # SC
-                    self.g2p_3(self.CAV[0,:], 0)
-                   
-                E_X = [self.LEQ]
-                E_D_b = self.LEQ + 1 
-               
-                QApplication.setOverrideCursor(Qt.WaitCursor)
+                        self.le_beta_2.setText(str(self.beta))
+
+            
+            if self.path_to_elmg_file != '':
+                ok = 0
+                try:
+                    if self.F_target < 0: #the frequancy target should not be less than zero
+                        self.warning_wdj('Frequency target must be positive float number!')
+                        ok = 1
+                    else:
+                        widget_tune_parameters = Tune_parameters(self)
+                        widget_tune_parameters.exec_() 
+                        f_toll = widget_tune_parameters.f_toll
+                except:
+                    self.warning_wdj('Frequency target must be positive float number!')
+                    ok = 1
+            else:
+                ok = 1
                 
+            if  ok == 0 and f_toll != 'cancel':            
+                LX = [self.new_parameter_EC] #change MT
+                LD_b = self.new_parameter_EC + 1 #change MT
+                
+                QApplication.setOverrideCursor(Qt.WaitCursor)
+            
                 self.beta=emfn1.def_beta_EG(self.F_target, self.CAV)
                 self.run_EG_sym(self.path_to_elmg_file, self.CAV, self.F_target, self.dx, self.beta)
-                F  = [emfn1.Resonance_frequency(self.path_to_elmg_file) - self.F_target]
-           
-                self.CAV_py_2[0,1] = E_D_b
-
-                if self.tabWidget.currentIndex() == 1: # EG
-                    self.p2g_2(self.CAV_py_2[0,:], 0)
-                elif self.tabWidget.currentIndex() == 3: # SC
-                    self.p2g_3(self.CAV_py_2[0,:], 0)
-            
-                self.CAV[0, 0:7] = self.CAV_ge_2[0, 0:7]
-                self.CAV[2,4] = self.CAV_ge_2[0,4]
-    
-                self.run_EG_sym(self.path_to_elmg_file, self.CAV, self.F_target, self.dx, self.beta)
-                f_b  = emfn1.Resonance_frequency(self.path_to_elmg_file) - self.F_target
-               
-                DF = (f_b-F[0])/(E_D_b-X[0])
-                E_X += [X[0]-F[0]/DF]
-                       
-                res = 10000
-                k = 0
-                while True:
-                    self.CAV_py_2[0,1] = X[-1]
-
-                    if self.tabWidget.currentIndex() == 1: # EG
-                        self.p2g_2(self.CAV_py_2[0,:], 0)
-                    elif self.tabWidget.currentIndex() == 3: # SC
-                        self.p2g_3(self.CAV_py_2[0,:], 0)                      
-                    
-                    self.CAV[0, 0:7] = self.CAV_ge_2[0, 0:7]
-                    self.CAV[2,4] = self.CAV_ge_2[0,4]
-    
-                    self.run_EG_sym(self.path_to_elmg_file, self.CAV, self.F_target, self.dx, self.beta)
-                    F += [emfn1.Resonance_frequency(self.path_to_elmg_file) - self.F_target]
-               
-                    DF = (F[-1]-F[-2])/(X[-1]-X[-2])
-                    X += [X[-1]-F[-1]/DF]
-                   
-                    res = np.abs(F[-1]-F[-2])
-           
-                    k += 1
-                   
-                    if res < f_toll:
-                        break
-                   
-                    elif k > 100:
-                        self.warning_wdj('Unable to find a feasible solution. Process has been killed.')
-                        break
-        
-                QApplication.restoreOverrideCursor() 
-               
-                self.fill_elmg_parameters_2(self.CAV)
+                res=emfn1.Resonance_frequency(self.path_to_elmg_file)
                 
-                if self.tabWidget.currentIndex() == 1: # EG
-                    self.frame_sf_execution_2.show()
-                elif self.tabWidget.currentIndex() == 3: # SC
-                    self.frame_sf_execution_3.show()
+                if res==self.F_target: # look at line 1248: to iterate the frequency for the tuning, it is calculated as the difference
+                    # between emfn1.Resonance_frequency(self.path_to_elmg_file) and self.F_target. So the starting frequency must be different from the resonance frequency
+                    # calculated with the resonance_frequency function
+                    self.warning_wdj('Please insert a different starting frequency.')
+                else:
+                    F  = [res - self.F_target]
+                    self.new_parameter_EC = LD_b
+                    self.new_parameter_IC = self.new_parameter_EC
+                    #self.CAV[2,4] = LD_b
+                    self.run_EG_sym(self.path_to_elmg_file, self.CAV, self.F_target, self.dx, self.beta)
+                    f_b  = emfn1.Resonance_frequency(self.path_to_elmg_file) - self.F_target
+                    
+                    DF = (f_b-F[0])/(LD_b-LX[0]) #error goes to zero
+                    LX += [LX[0]-F[0]/DF]
+                    
+                    res = 10000
+                    k = 0
+                    while True:
+                        self.new_parameter_EC = LX[-1]
+                        self.new_parameter_IC = self.new_parameter_EC
+                        #self.CAV[2,4] = LX[-1]
+                        self.run_EG_sym(self.path_to_elmg_file, self.CAV, self.F_target, self.dx, self.beta)
+                        F += [emfn1.Resonance_frequency(self.path_to_elmg_file) - self.F_target]
+                    
+                        DF = (F[-1]-F[-2])/(LX[-1]-LX[-2])
+                        LX += [LX[-1]-F[-1]/DF]
+                        
+                        res = np.abs(F[-1]-F[-2])
+                
+                        k += 1
+                        
+                        if res < f_toll:
+                            break
+                        
+                        elif k > 100:
+                            self.warning_wdj('Unable to find a feasible solution. Proces has been killed.')
+                            break
+    
+                    QApplication.restoreOverrideCursor() 
+                    
+                    self.new_parameter_EC = round(LX[-1], 4)
+                    #self.CAV[2,4] = round(X[-1], 4)
+                    self.CAV_ge_2 = np.asarray(self.CAV.tolist())
+                    self.fill_elmg_parameters_2(self.CAV)
+                    if self.tabWidget.currentIndex() == 1: # EG
+                        self.frame_sf_execution_2.show()
+                    
+                    self.CAV_tuning=self.CAV
+                    self.fill_g_param_2(self.CAV)    
+    
 
-                self.CAV_tuning=self.CAV
-                self.fill_g_param_2(self.CAV)
+
 
 ##############################################################################
     # draw the profile of the end group and of the single cell
@@ -3322,7 +3270,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             self.EC_EG[0,:] = CAV[0,:]
             self.EC_EG[0,7] = 16
             #x = Draw_cavity_profile('', self.EC_EG, 1) # old
-            x = Draw_cavity_profile_new('', self.EC_EG, 1, self.new_parameter_EC,self)
+            x = Draw_cavity_profile_new('', self.EC_EG, 1, self.LEQ,self)
             EC_coo = x.CAV_coo()
             EC_coo[:,0] = EC_coo[:,0] + IC_coo[-1,0]
         
@@ -3344,7 +3292,9 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             CAV_coo = np.append(CAV_coo, add, axis = 0)
 
 
-            ax=self.figure.add_subplot(1,1,1)     
+            ax=self.figure.add_subplot(1,1,1)   
+            print('cav_coo[:,0] ', CAV_coo[:,0])
+            print('cav_coo[:,1] ', CAV_coo[:,1])  
             ax.plot(CAV_coo[:,0], CAV_coo[:,1], 'r-')
             self.canvas.draw()
 
