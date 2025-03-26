@@ -3106,7 +3106,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
 
             self.eq_length_avg = (self.new_parameter_EC + self.new_parameter_IC)/2 #the average
             self.new_parameter_EC = self.eq_length_avg
-            self.new_parameter_IC = self.eq_length_avg
+            self.new_parameter_IC = self.eq_length_avg #updating the eq to be equal to the average
                
             if  ok == 0 and f_toll != 'cancel':            
                 LX = [self.new_parameter_EC] #change MT
