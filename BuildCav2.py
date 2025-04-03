@@ -2507,6 +2507,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
     # fill EG paramters values
     def fill_g_param_2(self, CAV): 
 
+
         if self.tabWidget.currentIndex() == 1: # EG
             self.le_Sxeq_EC.setText(str(round(CAV[0,0],self.round_val)))
             self.le_Syeq_EC.setText(str(round(CAV[0,1],self.round_val)))
@@ -2516,6 +2517,9 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             self.le_IR_EC.setText(str(round(CAV[0,5],self.round_val)))
             self.le_SL_EC.setText(str(round(CAV[0,6],self.round_val)))
         
+            self.le_LEQ_IC.setText(str(round(self.new_parameter_IC,self.round_val)))
+            self.le_LEQ_EC.setText(str(round(self.new_parameter_EC,self.round_val)))
+
             self.le_Sxeq_IC.setText(str(round(CAV[2,0],self.round_val)))
             self.le_Syeq_IC.setText(str(round(CAV[2,1],self.round_val)))
             self.le_Sxir_IC.setText(str(round(CAV[2,2],self.round_val)))
@@ -2523,6 +2527,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             self.le_ER_IC.setText(str(round(CAV[2,4],self.round_val)))
             self.le_IR_IC.setText(str(round(CAV[2,5],self.round_val)))
             self.le_SL_IC.setText(str(round(CAV[2,6],self.round_val)))
+            
         elif self.tabWidget.currentIndex() == 3: # SC
             self.le_Sxeq_EC_2.setText(str(round(CAV[0,0],self.round_val)))
             self.le_Syeq_EC_2.setText(str(round(CAV[0,1],self.round_val)))
