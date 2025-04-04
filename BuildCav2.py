@@ -2520,6 +2520,11 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             self.le_LEQ_IC.setText(str(round(self.new_parameter_IC,self.round_val)))
             self.le_LEQ_EC.setText(str(round(self.new_parameter_EC,self.round_val)))
 
+            length_eq_EC = self.CAV[0,6] # at each iteration I have to update the EC half cell length 04 04 2025
+            length_eq_IC = self.CAV[2,6] # at each iteration I have to update the IC half cell length 04 04 2025
+            length_EC = length_eq_EC - self.new_parameter_EC # EC half cell length 04 04 2025
+            length_IC = length_eq_IC - self.new_parameter_IC # IC half cell length 04 04 2025
+
             self.le_Sxeq_IC.setText(str(round(CAV[2,0],self.round_val)))
             self.le_Syeq_IC.setText(str(round(CAV[2,1],self.round_val)))
             self.le_Sxir_IC.setText(str(round(CAV[2,2],self.round_val)))
@@ -3109,13 +3114,13 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             else:
                 ok = 1
 
-            self.eq_length_avg = (self.new_parameter_EC + self.new_parameter_IC)/2 #the average
-            self.new_parameter_EC = self.eq_length_avg
-            self.new_parameter_IC = self.eq_length_avg #updating the eq to be equal to the average
+            #self.eq_length_avg = (self.new_parameter_EC + self.new_parameter_IC)/2 #the average
+            #self.new_parameter_EC = self.eq_length_avg
+            #self.new_parameter_IC = self.eq_length_avg #updating the eq to be equal to the average
                
             if  ok == 0 and f_toll != 'cancel':            
                 LX = [self.new_parameter_EC] #change MT
-                LD_b = self.new_parameter_EC + 1 #change MT
+                LD_b = self.new_parameter_EC + 0.5 #change MT
                 
                 QApplication.setOverrideCursor(Qt.WaitCursor)
             
@@ -3171,7 +3176,12 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                         self.frame_sf_execution_2.show()
                     
                     self.CAV_tuning=self.CAV
-                    self.fill_g_param_2(self.CAV)    
+                    self.fill_g_param_2(self.CAV)
+                    length_EC = self.CAV[0,6] - self.new_parameter_EC
+                    length_IC = self.CAV[2,6] - self.new_parameter_IC
+                                        
+                    self.CAV[0,6] = length_EC + self.new_parameter_EC
+                    self.CAV[2,6] = length_IC + self.new_parameter_IC
     
 
 
