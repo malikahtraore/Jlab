@@ -3057,6 +3057,16 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                         self.CAV[0,0:7] = self.CAV_ge_2[0,0:7]
                         self.CAV[2,0:7] = self.CAV_ge_2[2,0:7]
                         self.CAV[0,7] = 19
+                        # add to compute equator length 3054 - 3058 04 04 2025
+
+                        length_eq_EC = self.CAV[0,6] # at each iteration I have to update the EC half cell length 04 04 2025
+
+                        length_eq_IC = self.CAV[2,6] # at each iteration I have to update the IC half cell length 04 04 2025
+
+                        length_EC = length_eq_EC - self.new_parameter_EC # EC half cell length 04 04 2025
+
+                        length_IC = length_eq_IC - self.new_parameter_IC # IC half cell length 04 04 2025
+
                         if self.CAV[0,4] != self.CAV[2,4]:
                             if self.uniform_equator_diameter() == 'yes':
                                 self.CAV[2,4] = self.CAV[0,4]
@@ -3135,7 +3145,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                 else:
                     F  = [res - self.F_target]
                     self.new_parameter_EC = LD_b
-                    self.new_parameter_IC = self.new_parameter_EC
+                    #self.new_parameter_IC = self.new_parameter_EC
                     #self.CAV[2,4] = LD_b
                     self.run_EG_sym(self.path_to_elmg_file, self.CAV, self.F_target, self.dx, self.beta)
                     f_b  = emfn1.Resonance_frequency(self.path_to_elmg_file) - self.F_target
@@ -3147,7 +3157,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                     k = 0
                     while True:
                         self.new_parameter_EC = LX[-1]
-                        self.new_parameter_IC = self.new_parameter_EC
+                        #self.new_parameter_IC = self.new_parameter_EC
                         #self.CAV[2,4] = LX[-1]
                         self.run_EG_sym(self.path_to_elmg_file, self.CAV, self.F_target, self.dx, self.beta)
                         F += [emfn1.Resonance_frequency(self.path_to_elmg_file) - self.F_target]
@@ -3169,6 +3179,10 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                     QApplication.restoreOverrideCursor() 
                     
                     self.new_parameter_EC = round(LX[-1], 4)
+                    self.CAV[0,6] = length_EC + self.new_parameter_EC
+
+                    self.CAV[2,6] = length_IC + self.new_parameter_IC
+
                     #self.CAV[2,4] = round(X[-1], 4)
                     self.CAV_ge_2 = np.asarray(self.CAV.tolist())
                     self.fill_elmg_parameters_2(self.CAV)

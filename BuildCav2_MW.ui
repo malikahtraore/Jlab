@@ -397,7 +397,7 @@ image: url(:/database_img/database_img.png);</string>
            </rect>
           </property>
           <property name="text">
-           <string>Semicell lenght [mm]</string>
+           <string>Semicell length [mm]</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_25">
@@ -560,7 +560,7 @@ image: url(:/database_img/database_img.png);</string>
            </rect>
           </property>
           <property name="text">
-           <string>Half Cell lenght, L [mm]</string>
+           <string>Half cell length, L [mm]</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_4">
@@ -844,7 +844,7 @@ image: url(:/database_img/database_img.png);</string>
           </rect>
          </property>
          <property name="text">
-          <string>Equator Length </string>
+          <string>Equator length </string>
          </property>
         </widget>
         <widget class="QLineEdit" name="le_LEQ">
@@ -1128,7 +1128,7 @@ image: url(:/database_img/database_img.png);</string>
            </rect>
           </property>
           <property name="text">
-           <string>Semicell lenght [mm]</string>
+           <string>Semicell length [mm]</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_31">
@@ -1259,7 +1259,7 @@ image: url(:/database_img/database_img.png);</string>
           </rect>
          </property>
          <property name="text">
-          <string>Pen Cell</string>
+          <string>Inr Cell</string>
          </property>
         </widget>
         <widget class="QFrame" name="frame_sf_execution_2">
@@ -1539,7 +1539,7 @@ image: url(:/database_img/database_img.png);</string>
            </rect>
           </property>
           <property name="text">
-           <string>Half Cell lenght, L [mm]</string>
+           <string>Half Cell length, L [mm]</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_33">
@@ -1955,7 +1955,7 @@ background-color: rgb(204, 204, 204);</string>
           </rect>
          </property>
          <property name="text">
-          <string>Tune with Equator Length</string>
+          <string>Tune with Equator length</string>
          </property>
         </widget>
         <widget class="QLineEdit" name="le_LEQ_IC">
@@ -2025,7 +2025,7 @@ background-color: rgb(204, 204, 204);</string>
          </rect>
         </property>
         <property name="text">
-         <string>Equator Length </string>
+         <string>Equator length </string>
         </property>
        </widget>
       </widget>
@@ -2929,7 +2929,7 @@ background-color: rgb(204, 204, 204);</string>
            </rect>
           </property>
           <property name="text">
-           <string>Half Cell lenght, L [mm]</string>
+           <string>Half Cell length, L [mm]</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_51">
@@ -3257,7 +3257,7 @@ background-color: rgb(204, 204, 204);</string>
            </rect>
           </property>
           <property name="text">
-           <string>Semicell lenght [mm]</string>
+           <string>Semicell length [mm]</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_59">
