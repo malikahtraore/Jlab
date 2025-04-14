@@ -3165,7 +3165,9 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
                         DF = (F[-1]-F[-2])/(LX[-1]-LX[-2])
                         LX += [LX[-1]-F[-1]/DF]
                         
-                        res = np.abs(F[-1]-F[-2])
+                        #res = np.abs(F[-1]-F[-2])
+                        res = np.abs(F[-1]) #MT 04/14/25
+
                 
                         k += 1
                         
@@ -3307,7 +3309,7 @@ class BuildCav2(QMainWindow, Ui_BuildCav2):
             self.EC_EG[0,:] = CAV[0,:]
             self.EC_EG[0,7] = 16
             #x = Draw_cavity_profile('', self.EC_EG, 1) # old
-            x = Draw_cavity_profile_new('', self.EC_EG, 1, self.LEQ,self)
+            x = Draw_cavity_profile_new('', self.EC_EG, 1, self.new_parameter_EC,self) #Malikah 04/14
             EC_coo = x.CAV_coo()
             EC_coo[:,0] = EC_coo[:,0] + IC_coo[-1,0]
         
